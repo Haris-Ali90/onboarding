@@ -1,0 +1,28 @@
+sudo: false
+
+language: php
+
+stages:
+  - linter
+  - test
+
+php:
+  - '7.2'
+  - '7.3'
+  - '7.4'
+
+before_script:
+  - java -Djava.library.path=./DynamoDBLocal_lib -jar dynamodb_local/DynamoDBLocal.jar --port 3000 &
+  - sleep 2
+  - composer self-update
+  - composer install
+
+script: ./vendor/bin/phpunit
+
+jobs:
+  include:
+    - stage: linter
+      php: 7.2
+      before_script: source ./scripts/dev-setup.sh
+      script: phpcs -s {src/*,tests/*}
+
