@@ -136,14 +136,14 @@
 
     <script>
 
-        jQuery(document).ready(function() {
-            // initiate layout and plugins
-            App.init();
-            Admin.init();
-            $('#cancel').click(function() {
-                window.location.href = "{{route('dashboard.index') }}";
-            });
-        });
+        {{--jQuery(document).ready(function() {--}}
+        {{--    // initiate layout and plugins--}}
+        {{--    App.init();--}}
+        {{--    Admin.init();--}}
+        {{--    $('#cancel').click(function() {--}}
+        {{--        window.location.href = "{{route('dashboard.index') }}";--}}
+        {{--    });--}}
+        {{--});--}}
 
 
       $(function () {

@@ -56,6 +56,7 @@ class MicroHubUserListController extends Controller
     )
     {
 
+
         //$this->middleware('guest:web')->except('logout');
         parent::__construct();
         $this->HubRepository = $HubRepositoryInterface;
@@ -73,6 +74,7 @@ class MicroHubUserListController extends Controller
      */
     public function index(Request $request)
     {
+        dd($request->all());
         //Getting All Request Data
         $data = $request->all();
         //Get Email From Request
@@ -276,7 +278,7 @@ class MicroHubUserListController extends Controller
             $longitude = str_replace(".", "", $request->address_longitude);
             $longitudes = (strlen($longitude) > 10) ? (int)substr($longitude, 0, 9) : (int)$longitude;
 
-           
+
             $microHubUser = JoeycoUsers::find($request->user_id);
             $joeyco_user = JoeycoUsers::where('id', $request->user_id)->update([
                 'full_name' => $request->full_name,

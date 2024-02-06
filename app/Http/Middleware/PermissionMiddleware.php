@@ -32,7 +32,8 @@ class PermissionMiddleware
 
         // checking is if the user is super admin then pass
 
-        if($user_data->role_id == Permissions::GetSuperAdminRole())
+//        dd(Permissions::GetSuperAdminRole(),$user_data->role_id);
+        if($user_data->role_id === Permissions::GetSuperAdminRole())
         {
             return $next($request);
         }

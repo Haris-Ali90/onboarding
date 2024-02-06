@@ -12,6 +12,8 @@
 */
 
 
+use App\Models\Permissions;
+
 header('Cache-Control: no-cache, no-store, must-revalidate');
 header('Pragma: no-cache');
 header('Expires: 0');
@@ -315,7 +317,11 @@ Route::group(['prefix' => 'micro-hub'], function(){
         Route::get('joey/totalTrainingwatchedTable', 'JoeyController@totalTrainingwatchedTable')->name('joeys.totalTrainingwatchedTable');
         Route::get('joey/totalQuizPassedTable', 'JoeyController@totalQuizPassedTable')->name('joeys.totalQuizPassedTable');
         // after login routes
-//        Route::group(['middleware' => 'PermissionHandler'], function () {
+        Route::get('user', 'MicroHubUserListController@index')->name('micro-hub.users.index');
+        Route::get('user/data', 'MicroHubUserListController@data')->name('micro-hub.users.data');
+        Route::get('statusUpdate', 'MicroHubUserListController@statusUpdate')->name('micro-hub.users.statusUpdate');
+        Route::group(['middleware' => 'PermissionHandler'], function () {
+
 
             ### role management routes ###
             //Role Index
@@ -351,8 +357,9 @@ Route::group(['prefix' => 'micro-hub'], function(){
             Route::delete('sub-admin/{sub_admin}', 'SubAdminController@microHubDestroy')->name('micro-hub.sub-admin.delete');
 
             ### Micro hub User Requests List management routes ###
+
+            Route::get('user', 'MicroHubUserListController@index')->name('micro-hub.users.index');
             Route::get('user/data', 'MicroHubUserListController@data')->name('micro-hub.users.data');
-            Route::get('users', 'MicroHubUserListController@index')->name('micro-hub.users.index');
             Route::get('statusUpdate', 'MicroHubUserListController@statusUpdate')->name('micro-hub.users.statusUpdate');
 
 			 ###Micro Hub Assign###
@@ -449,7 +456,7 @@ Route::group(['prefix' => 'micro-hub'], function(){
             Route::post('/change-password', 'UsersController@microHubProcessChangePassword')->name('micro-hub.users.change-password');
 
 
-//        });
+        });
     });
     // before login routes
     //Route::get('login', static function(){dd('Reset Cache'); })->name('micro-hub.login');
